@@ -16,29 +16,31 @@ class ChirpController extends Controller
     public function index():Response
     {
         //return response('Hello, World!');
+        
 
-        return Inertia::render('Chirps/Index',
-         [
-            $validated = $request->validate(['message' => 'required|string|max:255',]);
-            $request->user()->chirps()->create($validated);
-            return redirect(route('chirps.index'));
-        ]);
+           return Inertia::render('Chirps/Index', [
+                'chirps' => Chirp::with('user:id,name')->latest()->get(),
+           ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    //public function create()
+    //{
+    //    //
+    //}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+           'message' => 'required|string|max:255',
+        ]);
+        $request->user()->chirps()->create($validated);
+        return redirect(route('chirps.index'));
     }
 
     /**
