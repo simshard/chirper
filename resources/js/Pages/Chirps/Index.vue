@@ -1,5 +1,5 @@
 <template>
-<Head title="Chirps" />
+<Head title="Speak your brains" />
 
  <AuthenticatedLayout>
   <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
